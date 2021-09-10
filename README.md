@@ -23,13 +23,13 @@ npm start
 ### Screenshot:
 
 if all task are done <br/>
-!['Nothing to do'](./screenshot-1.png')
+!['Nothing to do']('./screenshot-1.png')
 
 add task <br/>
-!['Nothing to do'](./screenshot-2.png')
+!['add task']('./screenshot-2.png')
 
 dark mode <br/>
-!['Nothing to do'](./screenshot-3.png')
+!['dark mode']('./screenshot-3.png')
 
 if try to add empty value <br/>
-!['Nothing to do'](./screenshot-4.png')
+!['if try to add empty value']('./screenshot-4.png')
