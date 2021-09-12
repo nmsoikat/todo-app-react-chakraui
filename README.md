@@ -13,23 +13,26 @@ npm start
 ### Features:
 
 - Add task.
+- Add with priority.
+- Sort with priority.
 - Remove task.
-- Show toast message if user try to add empty value.
+- Edit and update.
+- Show toast message if user try to add empty title.
 - Show message if there have not any task to do.
 - Local Storage.
 - Dark Mode.
-- Responsive
+- Responsive.
 
 ### Screenshot:
 
-if all task are done <br/>
+All task are done! <br/>
 ![Nothing to do](./screenshot-1.png)
 
-add task <br/>
+Add task. <br/>
 ![add task](./screenshot-2.png)
 
-dark mode <br/>
+Dark mode! <br/>
 ![dark mode](./screenshot-3.png)
 
-if try to add empty value <br/>
-![if try to add empty value](./screenshot-4.png)
+Edit and update task. <br/>
+![update](./screenshot-4.png)

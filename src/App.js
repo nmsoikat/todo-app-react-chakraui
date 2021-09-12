@@ -1,25 +1,23 @@
 import './App.css';
-import { useState, useEffect } from 'react';
-import { VStack, IconButton, Heading, useColorMode, Box } from '@chakra-ui/react';
+import { useState, useEffect, createContext } from 'react';
+import { VStack, IconButton, Heading, useColorMode } from '@chakra-ui/react';
 import { FaCloudSun, FaMoon } from 'react-icons/fa';
 import TodoList from './components/TodoList';
 import AddTodo from './components/AddTodo';
 
-function App() {
-	// const initialTodos = [
-	//   { id: 1, body: "One" },
-	//   { id: 2, body: "Two" },
-	// ];
+export const EditTodo = createContext();
 
+function App() {
 	// chakraui color mode
 	const { colorMode, toggleColorMode } = useColorMode();
 
 	//define todos array and initial data form local storage.
 	const [ todos, setTodos ] = useState(() => JSON.parse(localStorage.getItem('todos')) || []);
+	// edit todo
 	const [ editTodo, setEditTodo ] = useState({});
 
-	// add data to state
-	const addTodo = (todo) => {
+	// Add
+	const handelAddTodo = (todo) => {
 		if (todo.priority) {
 			setTodos([ todo, ...todos ]);
 		} else {
@@ -27,28 +25,24 @@ function App() {
 		}
 	};
 
-	// get data for edit
-	const handelEditTodo = (id) => {
-		let todo = {
-			title: '',
-			detail: '',
-			priority: false
-		};
-
-		setEditTodo(todos.find((todo) => todo.id === id) || todo);
-	};
-
-	// update from state
-	const updateTodo = (data) => {
+	// Update
+	const handelUpdateTodo = (data) => {
 		const index = todos.findIndex((todo) => todo.id === data.id);
-		const newTodos = [ ...todos ];
-		newTodos[index] = data;
-		setTodos(newTodos);
+		const existTodos = [ ...todos ];
 
-		setEditTodo({});
+		//if priority no change
+		if (existTodos[index].priority === data.priority) {
+			existTodos[index] = data; // update
+		} else {
+			existTodos[index] = data; // update
+			existTodos.sort((a, b) => b.priority - a.priority); // high priority first
+		}
+
+		setTodos(existTodos); // update state
+		setEditTodo({}); // reset
 	};
 
-	// remove from state
+	// Remove
 	const handelRemoveTodo = (id) => {
 		const newTodos = todos.filter((todo) => {
 			return todo.id !== id;
@@ -66,7 +60,7 @@ function App() {
 	);
 
 	return (
-		<VStack p={4} mx="auto" maxW={{ base: '90vw', sm: '70vw', lg: '40vw', xl: '30vw' }}>
+		<VStack p={4} mx="auto" maxW={{ base: '90vw', sm: '80vw', md: '70vw', lg: '600px' }}>
 			<IconButton
 				icon={colorMode === 'light' ? <FaCloudSun /> : <FaMoon />}
 				alignSelf="flex-end"
@@ -85,9 +79,11 @@ function App() {
 				Todo Application
 			</Heading>
 
-			<AddTodo addTodo={addTodo} editTodo={editTodo} updateTodo={updateTodo} />
+			<EditTodo.Provider value={[ editTodo, setEditTodo ]}>
+				<AddTodo handelAddTodo={handelAddTodo} handelUpdateTodo={handelUpdateTodo} />
 
-			<TodoList todos={todos} handelEditTodo={handelEditTodo} handelRemoveTodo={handelRemoveTodo} />
+				<TodoList todos={todos} handelRemoveTodo={handelRemoveTodo} />
+			</EditTodo.Provider>
 		</VStack>
 	);
 }

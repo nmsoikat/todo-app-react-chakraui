@@ -1,37 +1,37 @@
-import React from 'react';
-import {
-	VStack,
-	HStack,
-	Stack,
-	Text,
-	IconButton,
-	StackDivider,
-	Spacer,
-	Badge,
-	useColorMode,
-	Divider,
-	Box
-} from '@chakra-ui/react';
+import { VStack, HStack, Stack, Text, IconButton, Badge, Divider } from '@chakra-ui/react';
 import { FaTrash, FaEdit } from 'react-icons/fa';
+import { useContext } from 'react';
+import { EditTodo } from '../App';
 
-function TodoList({ todos, handelRemoveTodo, handelEditTodo }) {
-	const { colorMode } = useColorMode();
+function TodoList({ todos, handelRemoveTodo }) {
+	const [ editTodo, setEditTodo ] = useContext(EditTodo); // global state
+
+	// get data for edit
+	const handelEditTodo = (id) => {
+		let todo = {
+			title: '',
+			detail: '',
+			priority: false
+		};
+
+		setEditTodo(todos.find((todo) => todo.id === id) || todo);
+	};
 
 	if (!todos.length) {
 		return (
 			<Badge p="4" colorScheme="green" borderRadius="lg">
-				Nothing to do !!
+				Nothing to do!!
 			</Badge>
 		);
 	}
 
 	return (
-		<VStack p="2" w="100%" alignItems="stretch">
+		<VStack p="1" w="100%" alignItems="stretch">
 			{todos.map(function(todo) {
 				return (
 					<Stack
 						key={todo.id}
-						p="2"
+						p="1"
 						borderRadius="lg"
 						border="1px"
 						borderColor={todo.priority ? 'pink.300' : 'gray.200'}
@@ -44,11 +44,17 @@ function TodoList({ todos, handelRemoveTodo, handelEditTodo }) {
 						>
 							{todo.title}
 						</Text>
-						<Divider borderColor="gray.400" />
-						<Text>{todo.detail}</Text>
-						<Spacer />
-						<HStack textAlign="right" borderRadius="lg" padding="1" w="100%" justifyContent="space-between">
-							<Badge colorScheme={todo.priority ? 'pink' : 'gray'} borderRadius="lg">
+						<Divider marginTop="4px !important" borderColor="gray.400" />
+						<Text marginTop="4px !important">{todo.detail}</Text>
+						<HStack
+							marginTop="0px !important"
+							textAlign="right"
+							borderRadius="lg"
+							padding="1"
+							w="100%"
+							justifyContent="space-between"
+						>
+							<Badge colorScheme={todo.priority ? 'pink' : 'gray'} px="1" borderRadius="md">
 								{todo.priority ? 'High' : 'Normal'}
 							</Badge>
 							<HStack spacing="1">

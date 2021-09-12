@@ -1,32 +1,22 @@
-import {
-	VStack,
-	HStack,
-	Input,
-	Button,
-	useToast,
-	Textarea,
-	Box,
-	useColorMode,
-	Checkbox,
-	Spacer,
-	Flex
-} from '@chakra-ui/react';
-import React, { useEffect } from 'react';
-import { useState } from 'react/cjs/react.development';
+import { VStack, HStack, Input, Button, useToast, Textarea, Box, useColorMode, Checkbox } from '@chakra-ui/react';
+import { useContext, useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
+import { EditTodo } from '../App';
 
-function AddTodo({ addTodo, editTodo, updateTodo }) {
-	//chakraUI color mode
-	const { colorMode } = useColorMode();
-
-	// chakraUI tost
-	const toast = useToast();
+function AddTodo({ handelAddTodo, handelUpdateTodo }) {
+	// global state
+	const [ editTodo, setEditTodo ] = useContext(EditTodo);
 
 	// all state
 	const [ title, setTitle ] = useState();
 	const [ detail, setDetail ] = useState();
 	const [ priority, setPriority ] = useState();
 
+	//chakra ui
+	const { colorMode } = useColorMode();
+	const toast = useToast();
+
+	// edit data
 	useEffect(
 		() => {
 			setTitle(editTodo.title);
@@ -36,7 +26,6 @@ function AddTodo({ addTodo, editTodo, updateTodo }) {
 		[ editTodo ]
 	);
 
-	// console.log(title, detail, priority);
 	// Form submit
 	const onSubmit = (e) => {
 		e.preventDefault();
@@ -62,13 +51,12 @@ function AddTodo({ addTodo, editTodo, updateTodo }) {
 			priority
 		};
 
+		// add or update
 		if (!Object.keys(editTodo).length) {
-			addTodo(todo);
+			handelAddTodo(todo);
 		} else {
-			updateTodo(todo);
+			handelUpdateTodo(todo);
 		}
-
-		// console.log(todo);
 
 		// reset
 		setTitle('');
@@ -103,7 +91,7 @@ function AddTodo({ addTodo, editTodo, updateTodo }) {
 					/>
 					<HStack w="100%" justifyContent="space-between">
 						<Checkbox
-							color="pink.300"
+							color="pink.400"
 							colorScheme="pink"
 							fontWeight="bold"
 							isChecked={priority || false}
