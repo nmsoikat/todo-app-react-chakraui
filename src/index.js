@@ -1,8 +1,8 @@
-import React from "react";
-import ReactDOM from "react-dom";
-import "./index.css";
-import App from "./App";
-import { ChakraProvider, ColorModeScript, extendTheme } from "@chakra-ui/react";
+import React from 'react';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
+import { ChakraProvider, ColorModeScript } from '@chakra-ui/react';
 
 // const config = {
 //   initialColorMode: "light",
@@ -17,11 +17,11 @@ import { ChakraProvider, ColorModeScript, extendTheme } from "@chakra-ui/react";
 // <ColorModeScript initialColorMode={theme.config.initialColorMode} />
 
 ReactDOM.render(
-  <React.StrictMode>
-    <ChakraProvider>
-      <ColorModeScript initialColorMode="light" />
-      <App />
-    </ChakraProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
+	<React.StrictMode>
+		<ChakraProvider>
+			<ColorModeScript initialColorMode="light" />
+			<App />
+		</ChakraProvider>
+	</React.StrictMode>,
+	document.getElementById('root')
 );

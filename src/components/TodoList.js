@@ -4,7 +4,7 @@ import { useContext } from 'react';
 import { EditTodo } from '../App';
 
 function TodoList({ todos, handelRemoveTodo }) {
-	const [ editTodo, setEditTodo ] = useContext(EditTodo); // global state
+	const [ , setEditTodo ] = useContext(EditTodo); // global state
 
 	// get data for edit
 	const handelEditTodo = (id) => {

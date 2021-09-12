@@ -5,7 +5,7 @@ import { EditTodo } from '../App';
 
 function AddTodo({ handelAddTodo, handelUpdateTodo }) {
 	// global state
-	const [ editTodo, setEditTodo ] = useContext(EditTodo);
+	const [ editTodo ] = useContext(EditTodo);
 
 	// all state
 	const [ title, setTitle ] = useState();
