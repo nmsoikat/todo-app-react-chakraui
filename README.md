@@ -17,8 +17,8 @@ npm start
 - Sort with priority.
 - Remove task.
 - Edit and update.
-- Show toast message if user try to add empty title.
-- Show message if there have not any task to do.
+- Show toast message if the user tries to add an empty title.
+- Show message if there has not no task to do.
 - Local Storage.
 - Dark Mode.
 - Responsive.

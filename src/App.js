@@ -76,7 +76,7 @@ function App() {
 				bgClip="text"
 				marginBottom="16px !important"
 			>
-				To Do Application
+				To-Do Application
 			</Heading>
 
 			<EditTodo.Provider value={[ editTodo, setEditTodo ]}>
