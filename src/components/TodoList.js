@@ -8,13 +8,7 @@ function TodoList({ todos, handelRemoveTodo }) {
 
 	// get data for edit
 	const handelEditTodo = (id) => {
-		let todo = {
-			title: '',
-			detail: '',
-			priority: false
-		};
-
-		setEditTodo(todos.find((todo) => todo.id === id) || todo);
+		setEditTodo(todos.find((todo) => todo.id === id) || {});
 	};
 
 	if (!todos.length) {

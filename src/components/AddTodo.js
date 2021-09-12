@@ -8,9 +8,9 @@ function AddTodo({ handelAddTodo, handelUpdateTodo }) {
 	const [ editTodo ] = useContext(EditTodo);
 
 	// all state
-	const [ title, setTitle ] = useState();
-	const [ detail, setDetail ] = useState();
-	const [ priority, setPriority ] = useState();
+	const [ title, setTitle ] = useState('');
+	const [ detail, setDetail ] = useState('');
+	const [ priority, setPriority ] = useState(false);
 
 	//chakra ui
 	const { colorMode } = useColorMode();
@@ -21,7 +21,7 @@ function AddTodo({ handelAddTodo, handelUpdateTodo }) {
 		() => {
 			setTitle(editTodo.title);
 			setDetail(editTodo.detail);
-			setPriority(editTodo.priority);
+			setPriority(editTodo.priority || false);
 		},
 		[ editTodo ]
 	);
@@ -85,9 +85,9 @@ function AddTodo({ handelAddTodo, handelUpdateTodo }) {
 					/>
 					<Textarea
 						variant="filled"
-						onChange={(e) => setDetail(e.target.value)}
 						placeholder="Task description"
 						value={detail}
+						onChange={(e) => setDetail(e.target.value)}
 					/>
 					<HStack w="100%" justifyContent="space-between">
 						<Checkbox
